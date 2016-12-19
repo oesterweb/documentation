@@ -77,7 +77,26 @@ install ``php-pecl-apcu``. On Debian/Ubuntu/Mint systems install ``php5-apcu``.
 On Ubuntu 14.04LTS, the APCu version is 4.0.2, which is too old to use with Nextcloud. Nextcloud requires 4.0.6+. You may install 4.0.7 from Ubuntu backports with this command::
 
   apt-get install php5-apcu/trusty-backports
-   
+
+or for PHP 7:
+
+  apt-get install gcc make autoconf libc-dev pkg-config
+  pecl install apcu
+
+When you get this questions, press ENTER:
+
+  Enable internal debugging in APCu [no] :
+
+Then write a file in
+  /etc/php/7.0/mods-available
+with following content:
+  ; configuration for php APCU Cache module
+  ; priority=10
+  extension=apcu.so
+
+After this activate the php module with:
+  phpenmod apcu
+
 Then restart your Web server.
 
 After restarting your Web server, add this line to your ``config.php`` file::
